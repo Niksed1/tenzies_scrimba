@@ -2,7 +2,7 @@ body {
   background-color: #0B2434;
   padding: 15px;
   height: 100vh;
-  display:flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -14,6 +14,31 @@ main {
   height: 420px;
   border-radius: 10px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 54px 54px 54px 54px 54px;
+  grid-template-rows: 54px 54px; 
+  justify-content: center;
+  gap: 15px;
 }
 
 
+button.roll {
+  height: 50px;
+  width: 100px;
+  background-color: #5035FF;
+  border: none;
+  color: white;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  font-size: 1.75rem;
+  font-weight: bold;
+  font-family: Karla, sans-serif;  
+  border-radius: 5px;
+  cursor: pointer;
+}
