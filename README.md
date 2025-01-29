@@ -1,6 +1,7 @@
 # Tenzies
 
 Welcome to Tenzi, a dice rolling game! Roll the dice until you get the same number on all 10 dice. 
+
 ![Alt text](public/tenzies.png)
 
 
