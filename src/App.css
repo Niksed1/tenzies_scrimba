@@ -44,12 +44,12 @@ main {
 
 button.roll {
   height: 50px;
-  width: 100px;
+  width: 150px;
   background-color: #5035FF;
   border: none;
   color: white;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  font-size: 1.75rem;
+  font-size: 1.55rem;
   font-weight: bold;
   font-family: Karla, sans-serif;  
   border-radius: 5px;

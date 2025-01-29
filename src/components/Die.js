@@ -1,5 +1,4 @@
 import './Die.css';
-import {useState} from 'react';
 
 export default function Die (props) {
 
@@ -8,8 +7,13 @@ export default function Die (props) {
     }
 
     return (
-        <div>
-            <button className="die" style={styles} onClick={() => props.click(props.id)}>{props.value}</button>
-        </div>
+        <button className="die" 
+            style={styles} 
+            onClick={() => props.click(props.id)} 
+            aria-pressed={props.isHeld}
+            aria-label={`Die with value ${props.value}, 
+            ${props.isHeld ? "held" : "not held"}`}
+        >{props.value}</button>
+        
     );
 }

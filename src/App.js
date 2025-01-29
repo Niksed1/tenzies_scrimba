@@ -1,34 +1,49 @@
 import './App.css';
 import Die from './components/Die';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { nanoid } from "nanoid"
+import { useWindowSize } from 'react-use'
+import Confetti from 'react-confetti'
 function App() {
-/**
-     * Challenge: Update the `rollDice` function to not just roll
-     * all new dice, but instead to look through the existing dice
-     * to NOT roll any that are being `held`.
-     * 
-     * Hint: this will look relatively similiar to the `hold`
-     * function below. When we're "rolling" a die, we're really
-     * just updating the `value` property of the die object.
-     */ 
-
+  let gameWon = false;
   const [dice, setDice] = useState(generateAllNewDice());
+  const { width, height } = useWindowSize()
+  const focusRef = useRef(null);
+
+
+
+  if (dice.every(x => x.isHeld) && 
+        dice.every(x => x.value === dice[0].value)){
+        gameWon = true;
+    }
+
+
+  useEffect(() => {
+      if (gameWon){
+        focusRef.current.focus()
+      }
+  }, [gameWon])
 
   function generateAllNewDice() {
     return new Array(10)
           .fill(0)
           .map(() => ({
           value: Math.ceil(Math.random() * 6), 
+          //value: 2,
           isHeld: false,
           id: nanoid()
       }));
   }
 
   function reroll(){
+    if (gameWon){
+      setDice(() => generateAllNewDice())
+    }
+    else {
     setDice(oldDice => oldDice.map(die => 
         die.isHeld ? die : {...die, value: Math.ceil(Math.random() * 6)}
     ));
+    }
   }
 
   function hold(id){
@@ -47,8 +62,11 @@ function App() {
       <div className="container">
         {dice.map(x => <Die key={x.id} id = {x.id} value={x.value} isHeld={x.isHeld} click={hold}/>)}
       </div>
-      <button className="roll" onClick={reroll}>
-        Roll
+      <button className="roll" ref={focusRef} onClick={reroll}>
+        {gameWon ? "New Game" : "Roll"}
+        {gameWon && <Confetti
+              width={width}
+              height={height} /> }
       </button>
     </main>
   );
